@@ -1,0 +1,155 @@
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables ──────────────────────────────────────── */
+:root {
+  --bg:            #fafafa;
+  --bg-secondary:  #f4f4f5;
+  --surface:       #ffffff;
+  --surface-hover: #f4f4f5;
+  --border:        rgba(0,0,0,0.08);
+  --text:          #09090b;
+  --text-muted:    #71717a;
+  --brand:         #0ea5e9;
+  --brand-dark:    #0284c7;
+  --accent:        #8b5cf6;
+
+  --toast-bg:     #ffffff;
+  --toast-color:  #09090b;
+  --toast-border: rgba(0,0,0,0.1);
+
+  --glass-bg:     rgba(255,255,255,0.72);
+  --glass-border: rgba(255,255,255,0.6);
+}
+
+.dark {
+  --bg:            #09090b;
+  --bg-secondary:  #0d0d10;
+  --surface:       #131316;
+  --surface-hover: #18181b;
+  --border:        rgba(255,255,255,0.07);
+  --text:          #fafafa;
+  --text-muted:    #a1a1aa;
+
+  --toast-bg:     #18181b;
+  --toast-color:  #fafafa;
+  --toast-border: rgba(255,255,255,0.08);
+
+  --glass-bg:     rgba(19,19,22,0.8);
+  --glass-border: rgba(255,255,255,0.06);
+}
+
+/* ── Base ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin: 0;
+}
+
+/* ── Typography ─────────────────────────────────────────── */
+.font-display {
+  font-family: 'Cabinet Grotesk', sans-serif;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── Glass ──────────────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+}
+
+/* ── Gradient text ──────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Input base ─────────────────────────────────────────── */
+.input-base {
+  @apply w-full px-4 py-3 rounded-xl text-sm transition-all duration-200 outline-none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.input-base:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.15);
+}
+.input-base::placeholder { color: var(--text-muted); }
+
+/* ── Button variants ────────────────────────────────────── */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200;
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: white;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(14,165,233,0.35);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn-ghost:hover { background: var(--surface-hover); }
+
+/* ── Card ────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: box-shadow 0.2s ease;
+}
+.card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+.dark .card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+
+/* ── Animations ─────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-hover) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ── Link card hover ─────────────────────────────────────── */
+.link-card {
+  @apply card p-4 cursor-default;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.link-card:hover { border-color: rgba(14,165,233,0.3); }
+
+/* ── Recharts override ──────────────────────────────────── */
+.recharts-tooltip-wrapper { outline: none !important; }
+.recharts-default-tooltip {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  color: var(--text) !important;
+}
